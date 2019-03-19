@@ -61,11 +61,20 @@ app.get('/projects', (req, res) => {
 });
 
 app.get('/bad', (req, res) => {
-  res.send({
+  res.status(404).send({
     errorMessage: 'Bad Page'
   });
+});
+
+app.get('/health_check', (req, res) => {
+  res.send([
+    {
+      health_check: 'OK'
+    }
+  ]);
 });
 
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });
+module.exports.app = app;
