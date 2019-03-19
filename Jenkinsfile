@@ -5,18 +5,17 @@ node {
      sh "git rev-parse --short HEAD > .git/commit-id"
      commit_id = readFile('.git/commit-id').trim()
    }
-   stage('Build Docker') {
-     app = docker.build("jorgepi/nodejs-web-server:${commit_id}")
-   }
-   stage('test') {
-     app.inside {
-       sh 'npm install --only=dev'
+   stage('Pull and Test') {
+     def myTestContainer = docker.image('node:4.6')
+     myTestContainer.pull()
+     myTestContainer.inside {     
+       sh 'npm install'
        sh 'npm test'
      }
-   }                                  
-   stage('docker push') {            
+   }               
+   stage('Build and Push') {            
      docker.withRegistry('https://index.docker.io/v1/', 'docker-hub') {
-       app.push("${env.BUILD_NUMBER}")
+       def app = docker.build("jorgepi/nodejs-web-server:${env.BUILD_NUMBER}", '.')
        app.push("latest")
      }                                     
    }                                       
