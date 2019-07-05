@@ -2,8 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      — image: node:7.10
-    working_directory: /app
+      — image: circleci/node:4.8.2
     steps:
       — checkout
       - run: 
