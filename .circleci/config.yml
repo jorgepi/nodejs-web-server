@@ -8,7 +8,7 @@ jobs:
       - run: npm install
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: circleci/node:4.8.2
     steps:
       - checkout
       - run: npm test
