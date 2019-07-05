@@ -2,12 +2,19 @@ version: 2
 jobs:
   build:
     docker:
-      — image: circleci/node:4.8.2
+      - image: circleci/node:4.8.2
     steps:
-      — checkout
-      - run:
-          name: npm-install
-          command: 'npm install'
-      — run:
-          name: npm-test
-          command: 'npm test'
+      - checkout
+      - run: npm install
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: npm test
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
