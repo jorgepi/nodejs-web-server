@@ -6,6 +6,9 @@ jobs:
     working_directory: /app
     steps:
       — checkout
-      - run: 'npm install'
- 
-      — run: 'npm test'
+      - run: 
+        name: npm-install
+        command: 'npm install'
+      — run: 
+        name: npm-test
+        command: 'npm test'
