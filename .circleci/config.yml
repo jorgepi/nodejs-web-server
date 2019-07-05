@@ -10,3 +10,5 @@ jobs:
           docker run -it --name app1 jorgepi/nodejs_webserver:$TAG npm test
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push jorgepi/nodejs_webserver:$TAG
+          docker tag jorgepi/nodejs_webserver:$TAG jorgepi/nodejs_webserver:latest
+          docker push jorgepi/nodejs_webserver:latest
