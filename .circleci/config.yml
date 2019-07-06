@@ -17,6 +17,7 @@ jobs:
           docker tag jorgepi/nodejs_webserver:$TAG jorgepi/nodejs_webserver:latest
           docker push jorgepi/nodejs_webserver:latest
   deploy:
+    machine: true
     steps:
       - checkout
       - run:
