@@ -27,4 +27,4 @@ workflows:
       - build-test-push
       - deploy:
           requires:
-            - build
+            - build-test-push
